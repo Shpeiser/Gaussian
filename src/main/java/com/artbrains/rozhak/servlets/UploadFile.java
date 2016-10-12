@@ -1,4 +1,4 @@
-package com.artbrains.test.rozhak.servlets;
+package com.artbrains.rozhak.servlets;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,7 +20,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FileUtils;
 
-import com.artbrains.test.rozhak.blurer.GaussianBlur;
+import com.artbrains.rozhak.blurer.GaussianBlur;
 
 /**
  * Servlet implementation class UploadFile
@@ -29,7 +29,7 @@ import com.artbrains.test.rozhak.blurer.GaussianBlur;
 public class UploadFile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	final String uploadPath = "C:/himanshu/uploads";
+	final String uploadPath = System.getProperty("java.io.tmpdir");
 	// = getServletContext().getRealPath("/");
 
 	@Override

@@ -1,4 +1,4 @@
-package com.artbrains.test.rozhak.blurer;
+package com.artbrains.rozhak.blurer;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
