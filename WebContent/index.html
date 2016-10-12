@@ -1,0 +1,97 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>Gaussian bluring</TITLE>
+<script>
+	function evalSlider() {
+		var sliderValue = document.getElementById('blur').value;
+		document.getElementById('sliderVal').innerHTML = sliderValue;
+	}
+	
+</script>
+<script src="jquery-1.8.2.js"></script>
+<script src="jquery.ajaxfileupload.js"></script>
+<script language="Javascript">
+	$(document).ready(function() {
+
+		$('input[type="file"]').ajaxfileupload({
+			'action' : 'UploadFile',
+			'onComplete' : function(response) {
+				$('#upload').hide();
+				$('#inputRow').hide();
+				/* alert("If that was picture - it was uploaded!! " + response); */
+				document.getElementById('fileName').innerHTML = response;
+				$('#fileList').show();
+				$("#submit").show();
+				$("#blurRadius").show();
+				$("#sliderVal").val($("#blur").val());
+			},
+			'onStart' : function() {
+				$('#upload').show();
+			}
+		});
+		$("#submit").click(function() {
+			var sliderValue = document.getElementById('blur').value;
+			var fileName = $("#fileName pre").text();
+			$("#submit").hide();
+			document.location.href = "/ArtBrainRozhak/UploadFile?fileName=" +fileName + "&blur=" +sliderValue ; 
+			$('#fileList').hide();
+			$("#blurRadius").hide();
+			$(":input").val("");
+			$("#sliderVal").val($("#blur").val());
+			$('#inputRow').show();
+			
+		});
+
+	});
+</script>
+</HEAD>
+<BODY>
+	<FORM ENCTYPE="multipart/form-data" ACTION="/UploadFile" METHOD=POST
+		name="form1" id="form1" >
+		<br> <br> <br>
+
+		<table align="center" border="0" bgcolor=#ccFDDEE style="color: Black; background-color: White">
+			<tr>
+
+				<td colspan="2" align="center"><B>UPLOAD THE FILE</B></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"></td>
+			</tr>
+			<tr id="inputRow">
+				<td><b>Choose the file To Upload:</b></td>
+				<td><INPUT id="file" accept="image/*" NAME="file" TYPE="file"></td>
+			</tr>
+			<tr id="blurRadius" style="display: none;">
+				<td><b>Choose blur radius:</b></td>
+				<td><INPUT id="blur" TYPE="range" min="4" max="30" value="8"
+					step="2" onchange="evalSlider()" /> <output id="sliderVal"></output>
+				</td>
+			</tr>
+			<tr id="fileList" style="display: none;" >
+				<td colspan="2" align="center">
+				<p>File to proceed:</p>
+				<output id="fileName"></output>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><button type="button"
+						NAME="submit" id="submit" value="Send File" style="display: none;">
+						Blur and Download</button></td>
+			</tr>
+
+		</table>
+
+		<div id="upload" style="display: none;">Uploading..</div>
+		
+		
+
+
+	</FORM>
+
+
+
+</BODY>
+</HTML>
