@@ -40,7 +40,7 @@ public class GaussianBlur {
 		int blockImageWigth = imageWidth / numberOfColumns;
 		BufferedImage imageClone = deepCopy(img);
 
-		ExecutorService es = Executors.newFixedThreadPool(numberOfColumns * numberOfColumns );
+		ExecutorService es = Executors.newFixedThreadPool(numberOfColumns * numberOfColumns);
 
 		for (int i = 0; i < numberOfColumns; i++) {
 			for (int j = 0; j < numberOfColumns; j++) {
@@ -70,8 +70,8 @@ public class GaussianBlur {
 		return imageClone;
 	}
 
-	private static BufferedImage processPicture(BufferedImage img, BufferedImage imageClone, int kernelsize,
-			double[] kernel, int startX, int startY, int endX, int endY) {
+	private static void processPicture(BufferedImage img, BufferedImage imageClone, int kernelsize, double[] kernel,
+			int startX, int startY, int endX, int endY) {
 
 		int imgHeight = img.getWidth();
 		int imgWidth = img.getHeight();
@@ -125,8 +125,6 @@ public class GaussianBlur {
 				img.setRGB(i, j, new Color((int) red, (int) green, (int) blue).getRGB());
 			}
 		}
-
-		return img;
 
 	}
 
